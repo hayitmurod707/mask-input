@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/mask-input/static/css/main.41b4b1a5.css",
+    "main.js": "/mask-input/static/js/main.12621b61.js",
+    "static/media/Gilroy-Medium.woff2": "/mask-input/static/media/Gilroy-Medium.e2130cf5bbb93f1cc9e0.woff2",
+    "index.html": "/mask-input/index.html",
+    "main.41b4b1a5.css.map": "/mask-input/static/css/main.41b4b1a5.css.map",
+    "main.12621b61.js.map": "/mask-input/static/js/main.12621b61.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.41b4b1a5.css",
+    "static/js/main.12621b61.js"
+  ]
+}

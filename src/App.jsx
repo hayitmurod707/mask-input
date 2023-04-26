@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import CleaveInput from './CleaveInput';
 import ReactInputMask from './ReactInputMask';
+import ReactTextMask from './ReactTextMask';
 const StyledElement = styled.div`
    align-items: center;
    display: flex;
@@ -26,6 +27,9 @@ const App = () => {
    const [cleaveTime, setCleaveTime] = useState('');
    const [creditCard, setCreditCard] = useState('');
    const [phone, setPhone] = useState('');
+   const [time, setTime] = useState('');
+   const [textMaskCreditCard, setTextMaskCreditCard] = useState('');
+   const [textMaskDate, setTextMaskDate] = useState('');
    return (
       <StyledElement>
          <h1>Mask input</h1>
@@ -40,7 +44,6 @@ const App = () => {
                mask='+998 (bb) bbb bb bb'
                onChange={e => {
                   const phone = e.target.value
-                     .toString()
                      .replace(/\(/g, '')
                      .replace(/\)/g, '')
                      .replace(/\+/g, '')
@@ -57,13 +60,27 @@ const App = () => {
                formatChars={{ b: '[0-9]' }}
                mask='bbbb bbbb bbbb bbbb'
                onChange={e => {
-                  const creditCard = e.target.value
-                     .toString()
-                     .replace(/\s/g, '');
-                  setCreditCard(creditCard);
+                  setCreditCard(e.target.value.replace(/\s/g, ''));
                }}
-               placeholder='Enter your credit card'
+               placeholder='Enter credit card'
                value={creditCard}
+            />
+         </div>
+         <div className='content'>
+            <h3>Time</h3>
+            <ReactInputMask
+               formatChars={{
+                  a: '[0-2]',
+                  b: '[0-9]',
+                  c: '[0-5]',
+                  d: '[0-9]',
+               }}
+               mask='ab:cd'
+               onChange={e => {
+                  setTime(e.target.value.replace(/:/g, ''));
+               }}
+               placeholder='Enter time'
+               value={time}
             />
          </div>
          <div className='content'>
@@ -98,7 +115,7 @@ const App = () => {
                options={{
                   date: true,
                   datePattern: ['d', 'm', 'Y'],
-                  delimiter: '.',
+                  delimiter: '-',
                }}
                placeholder='Enter date'
                value={cleaveDate}
@@ -114,6 +131,45 @@ const App = () => {
                }}
                placeholder='Enter time'
                value={cleaveTime}
+            />
+         </div>
+         <div className='content'>
+            <h2>React text mask</h2>
+            <h3>Credit card</h3>
+            <ReactTextMask
+               mask={[
+                  /\d/,
+                  /\d/,
+                  /\d/,
+                  /\d/,
+                  ' ',
+                  /\d/,
+                  /\d/,
+                  /\d/,
+                  /\d/,
+                  ' ',
+                  /\d/,
+                  /\d/,
+                  /\d/,
+                  /\d/,
+                  ' ',
+                  /\d/,
+                  /\d/,
+                  /\d/,
+                  /\d/,
+               ]}
+               onChange={e => setTextMaskCreditCard(e.target.value)}
+               placeholder='Enter credit card'
+               value={textMaskCreditCard}
+            />
+         </div>
+         <div className='content'>
+            <h3>Date</h3>
+            <ReactTextMask
+               mask={[/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+               onChange={e => setTextMaskDate(e.target.value)}
+               placeholder='Enter date'
+               value={textMaskDate}
             />
          </div>
       </StyledElement>
